@@ -9,12 +9,12 @@ export default function OutboundButton() {
   const handleFireCampaign = async () => {
     setIsFiring(true);
     try {
-      const webhookUrl = process.env.NEXT_PUBLIC_N8N_OUTBOUND_WEBHOOK_URL || 'http://localhost:5678/webhook/zynteq-outbound-campaign';
+      const webhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || 'http://localhost:5678/webhook/zynteq-master-webhook';
       
       const res = await fetch(webhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ trigger: 'manual_agent_os' })
+        body: JSON.stringify({ source: 'Agent OS Button' })
       });
       
       if (!res.ok) throw new Error('Failed to trigger campaign');
