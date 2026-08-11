@@ -9,7 +9,7 @@ export default function OutboundButton() {
   const handleFireCampaign = async () => {
     setIsFiring(true);
     try {
-      const webhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || 'http://localhost:5678/webhook/zynteq-master-webhook';
+      const webhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || 'http://localhost:5678/webhook/zynteq-new-lead';
       
       const res = await fetch(webhookUrl, {
         method: 'POST',

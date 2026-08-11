@@ -28,6 +28,7 @@ export default function RootLayout({
               </div>
               
               <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 700, letterSpacing: '1px', padding: '1rem 1rem 0.5rem 1rem' }}>Overview</div>
                 <Link href="/" className="nav-link">
                   <LayoutDashboard size={20} />
                   Dashboard
@@ -44,6 +45,28 @@ export default function RootLayout({
                 <Link href="/activity" className="nav-link">
                   <Activity size={20} />
                   Activity Log
+                </Link>
+
+                <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 700, letterSpacing: '1px', padding: '1.5rem 1rem 0.5rem 1rem' }}>Departments</div>
+                <Link href="/departments/ceo" className="nav-link">
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#F5C518' }}></div>
+                  CEO Office
+                </Link>
+                <Link href="/departments/sales" className="nav-link">
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10B981' }}></div>
+                  Sales Dept
+                </Link>
+                <Link href="/departments/marketing" className="nav-link">
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#8B5CF6' }}></div>
+                  Marketing
+                </Link>
+                <Link href="/departments/hr" className="nav-link">
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#3B82F6' }}></div>
+                  HR & Ops
+                </Link>
+                <Link href="/departments/intel" className="nav-link">
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#EC4899' }}></div>
+                  Strategy & Intel
                 </Link>
               </nav>
             </div>

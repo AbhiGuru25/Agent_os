@@ -2,6 +2,7 @@ import { mockData } from "@/lib/supabase";
 import { ArrowLeft, User, Phone, Briefcase, Mail, Building, FileText, Activity } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import GenerateProposalButton from "@/components/GenerateProposalButton";
 
 export default async function LeadProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -74,13 +75,13 @@ export default async function LeadProfilePage({ params }: { params: Promise<{ id
               <div>
                 <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>Phone</div>
                 <div style={{ fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Phone size={16} color="var(--text-secondary)" /> {lead.phone || 'No phone'}
+                  <Phone size={16} color="var(--text-secondary)" /> {(lead as any).phone || 'No phone'}
                 </div>
               </div>
               <div>
                 <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>Email</div>
                 <div style={{ fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Mail size={16} color="var(--text-secondary)" /> {lead.email || 'No email'}
+                  <Mail size={16} color="var(--text-secondary)" /> {(lead as any).email || 'No email'}
                 </div>
               </div>
               
@@ -102,6 +103,7 @@ export default async function LeadProfilePage({ params }: { params: Promise<{ id
               <h3 style={{ margin: 0, fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <FileText size={20} color="var(--accent-primary)" /> Prepared Proposals
               </h3>
+              <GenerateProposalButton leadId={lead.id} leadName={lead.name} requirement={lead.requirement} />
             </div>
             
             {leadProposals.length === 0 ? (
