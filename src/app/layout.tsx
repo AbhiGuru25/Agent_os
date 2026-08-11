@@ -4,8 +4,34 @@ import RealtimeSubscriber from "@/components/RealtimeSubscriber";
 import Sidebar from "@/components/Sidebar";
 
 export const metadata: Metadata = {
-  title: "Agent OS | Command Center",
-  description: "Autonomous AI Workforce Dashboard",
+  title: "Zynteq | Autonomous AI Workforce Dashboard",
+  description: "Zynteq offers premium AI automation and autonomous workforce agents for scaling businesses across all industries globally.",
+  keywords: ["AI Automation", "Zynteq", "Autonomous Workforce", "AI Agency", "Agent OS", "Business Automation", "AI Agents", "Lead Generation", "SEO", "Global AI"],
+  authors: [{ name: "Zynteq" }],
+  openGraph: {
+    title: "Zynteq | Autonomous AI Workforce Dashboard",
+    description: "Scale your business with Zynteq's elite autonomous AI workforce.",
+    url: "https://agent-os-neon.vercel.app",
+    siteName: "Zynteq Agent OS",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Zynteq | Autonomous AI Workforce Dashboard",
+    description: "Scale your business with Zynteq's elite autonomous AI workforce.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({

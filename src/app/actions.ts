@@ -322,13 +322,23 @@ export async function triggerAgencySwarm(directive: string) {
 You are the elite Marketing Agent for Zynteq (an AI Automation Agency).
 The CEO just issued this directive: "${directive}"
 
-Draft 2 engaging social media posts to support this campaign.
+Your goal is to generate high-value content that converts readers into clients for Zynteq.
+
+Draft 2 engaging social media posts:
+1. A short-form post (LinkedIn/Twitter) highlighting a key statistic or insight.
+2. A long-form REDDIT post (for subreddits like r/Entrepreneur, r/SaaS, or r/smallbusiness). This must be a detailed "Case Study" or "How-To" value post explaining how AI automation solves a massive pain point. 
+CRITICAL: The Reddit post MUST end with a strong Call to Action (CTA) telling readers to visit "Zynteq" to get their own AI workforce or custom automation built.
+
 Return EXACTLY a JSON object with this shape:
 {
   "posts": [
     {
       "platform": "LinkedIn or Twitter",
       "content": "The actual post content."
+    },
+    {
+      "platform": "Reddit",
+      "content": "The long-form Reddit post with the Zynteq CTA."
     }
   ]
 }
