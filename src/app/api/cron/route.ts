@@ -2,6 +2,12 @@ import { NextResponse } from 'next/server';
 import { getStandingDirective, triggerAgencySwarm, runIntentHunt } from '@/app/actions';
 
 export async function GET(request: Request) {
+  // Secure the route with Vercel's built-in CRON_SECRET
+  const authHeader = request.headers.get('authorization');
+  if (process.env.CRON_SECRET && authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return new Response('Unauthorized', { status: 401 });
+  }
+
   try {
     const directive = await getStandingDirective();
     
