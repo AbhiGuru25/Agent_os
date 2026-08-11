@@ -125,7 +125,7 @@ Based on their website and requirements, draft a highly compelling, personalized
 Return EXACTLY a JSON object with this shape, and absolutely NO other text:
 {
   "title": "A catchy, professional proposal title",
-  "price_estimate": "A realistic premium price range (e.g. '$10,000 - $15,000')",
+  "price_estimate": "A realistic premium price range (e.g. '₹1,00,000 - ₹1,50,000')",
   "content": "The full proposal content in clean markdown formatting. Include sections for their specific pain points, the proposed AI solution, and the ROI."
 }
 `;

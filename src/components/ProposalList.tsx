@@ -54,7 +54,7 @@ export default function ProposalList({ initialProposals }: { initialProposals: P
             <div style={{ textAlign: 'right' }}>
               <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Estimated Price</div>
               <div style={{ fontSize: '2rem', fontWeight: 900, color: '#48BB78', fontFamily: 'var(--font-display)' }}>
-                {proposal.price_estimate || "$0"}
+                {proposal.price_estimate || "₹0"}
               </div>
             </div>
           </div>
