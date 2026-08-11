@@ -170,11 +170,29 @@ Return EXACTLY a JSON object with this shape, and absolutely NO other text:
   }
 }
 
-export async function autonomouslyFindLeads(query: string) {
+export async function autonomouslyFindLeads(directive: string) {
   try {
-    // 1. Search the web using Firecrawl
-    const searchResponse: any = await firecrawl.search(query, {
-      limit: 3 // Keep it to 3 to avoid massive LLM context for now
+    // 1. Query Expansion (The Strategist Agent)
+    const queryPrompt = `
+You are an expert lead generation strategist. The CEO has issued this directive: "${directive}"
+Convert this into a highly targeted, specific search query (like a Google Dork) to find REAL businesses that need AI automation.
+For example, instead of "find dentists", use "contact us" "dental clinic" "booking" or site:linkedin.com/company "customer service" "AI".
+Return EXACTLY a JSON object: { "searchQuery": "your optimized query string" }
+`;
+    const queryCompletion = await groq.chat.completions.create({
+      messages: [{ role: 'user', content: queryPrompt }],
+      model: 'llama-3.3-70b-versatile',
+      response_format: { type: 'json_object' }
+    });
+    
+    const queryParsed = JSON.parse(queryCompletion.choices[0]?.message?.content || '{"searchQuery": ""}');
+    const optimizedQuery = queryParsed.searchQuery || directive;
+    console.log(`[Sales Agent] Optimized Query: ${optimizedQuery}`);
+
+    // 2. Deep Scraping (The Hunter)
+    const searchResponse: any = await firecrawl.search(optimizedQuery, {
+      limit: 10, // DEEP SEARCH: Pull up to 10 sources
+      scrapeOptions: { formats: ['markdown'] }
     });
 
     if (!searchResponse || !searchResponse.web) {
@@ -186,30 +204,33 @@ export async function autonomouslyFindLeads(query: string) {
       `URL: ${result.url}\nTitle: ${result.title}\nContent:\n${result.markdown}\n---`
     ).join('\n');
 
-    // 2. Feed to Groq to extract business entities
+    // 3. Strict Qualification (The Analyst)
     const prompt = `
 You are Zynteq's elite Autonomous Lead Discovery Agent.
-I have used a web scraper to search for "${query}".
-Here is the raw markdown content from the top search results (mostly directories, listicles, or company websites):
+I have scraped deep web results for: "${optimizedQuery}".
 
 <search_results>
-${combinedMarkdown.slice(0, 20000)}
+${combinedMarkdown.slice(0, 30000)}
 </search_results>
 
-Your job is to parse this content and extract a list of distinct businesses/leads that match the search query.
+Your job is to extract HIGH-QUALITY, REAL businesses from this data.
+CRITICAL RULES:
+1. ONLY return real businesses with actual names and URLs. Do not return fake, test, or generic placeholder names.
+2. The business MUST show a genuine need for AI (e.g. outdated websites, negative customer reviews, hiring for repetitive roles, explicit pain points).
+3. Ignore listicles or generic directory aggregators; extract the ACTUAL businesses mentioned inside them.
 
-Return EXACTLY a JSON object with this shape, and absolutely NO other text:
+Return EXACTLY a JSON object with this shape:
 {
   "leads": [
     {
-      "name": "A contact person's name if found, otherwise use the business name",
-      "business_name": "The actual company name",
-      "industry": "The specific industry (e.g., 'Real Estate Agency', 'Law Firm')",
-      "website": "The company's website URL if found, otherwise 'Unknown'",
-      "phone": "The phone number if found, otherwise 'N/A'",
-      "email": "The email address if found, otherwise 'N/A'",
-      "service": "The specific service they might need (e.g., 'Voice AI', 'Chatbot', 'Automation'), otherwise 'AI Automation'",
-      "requirement": "A brief 1-sentence hypothesis on how AI automation could help them based on what you see."
+      "name": "Contact person name (or Business Name)",
+      "business_name": "Actual company name",
+      "industry": "Specific industry",
+      "website": "Valid URL (exclude if missing)",
+      "phone": "Phone number (if found)",
+      "email": "Email address (if found)",
+      "service": "What specific AI service do they need? (Voice AI, Lead Gen Bot, etc)",
+      "requirement": "A highly specific, researched reason WHY they need AI based on the scraped data."
     }
   ]
 }
@@ -230,8 +251,9 @@ Return EXACTLY a JSON object with this shape, and absolutely NO other text:
     }
 
     const newLeads = parsed.leads;
+    console.log(`[Sales Agent] Extracted ${newLeads.length} highly qualified leads.`);
 
-    // 3. Insert into Supabase
+    // 4. Insert into Supabase
     if (newLeads.length > 0) {
       const { error: insertError } = await supabase
         .from('leads')
