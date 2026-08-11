@@ -65,7 +65,7 @@ export default async function Dashboard() {
       {/* Main Content Area */}
       <div className="grid-2">
         {/* Recent Activity */}
-        <div className="glass-panel" style={{ padding: '2rem' }}>
+        <div className="glass-panel" style={{ padding: '1.5rem' }}>
           <div className="flex-between" style={{ marginBottom: '1.5rem' }}>
             <h3 style={{ margin: 0 }}>Recent Agent Activity</h3>
             <Link href="/activity" style={{ color: 'var(--accent-primary)', fontSize: '0.85rem', fontWeight: 600 }}>View All <ArrowRight size={14} style={{ display: 'inline', verticalAlign: 'middle' }}/></Link>
@@ -89,7 +89,7 @@ export default async function Dashboard() {
         </div>
 
         {/* Pending Proposals */}
-        <div className="glass-panel" style={{ padding: '2rem' }}>
+        <div className="glass-panel" style={{ padding: '1.5rem' }}>
           <div className="flex-between" style={{ marginBottom: '1.5rem' }}>
             <h3 style={{ margin: 0 }}>Action Required</h3>
             <Link href="/proposals" style={{ color: 'var(--accent-primary)', fontSize: '0.85rem', fontWeight: 600 }}>Review All <ArrowRight size={14} style={{ display: 'inline', verticalAlign: 'middle' }}/></Link>

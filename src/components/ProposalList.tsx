@@ -43,7 +43,7 @@ export default function ProposalList({ initialProposals }: { initialProposals: P
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       {initialProposals.map(proposal => (
-        <div key={proposal.id} className="glass-panel glow-effect" style={{ padding: '2.5rem' }}>
+        <div key={proposal.id} className="glass-panel glow-effect" style={{ padding: '1.5rem' }}>
           <div className="flex-between" style={{ marginBottom: '2rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '1.5rem' }}>
             <div>
               <div style={{ color: 'var(--accent-primary)', fontWeight: 800, fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>
@@ -94,7 +94,7 @@ export default function ProposalList({ initialProposals }: { initialProposals: P
       {/* Edit Modal */}
       {editingProposal && mounted ? createPortal(
         <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 99999, padding: '2rem' }}>
-          <div className="glass-panel" style={{ width: '100%', maxWidth: '800px', maxHeight: '90vh', overflowY: 'auto', padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', background: 'rgba(8, 14, 26, 0.95)', border: '1px solid var(--border-color)', borderRadius: '20px', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)' }}>
+          <div className="glass-panel" style={{ width: '100%', maxWidth: '800px', maxHeight: '90vh', overflowY: 'auto', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', background: 'rgba(8, 14, 26, 0.95)', border: '1px solid var(--border-color)', borderRadius: '20px', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)' }}>
             <div className="flex-between">
               <h2 style={{ margin: 0, fontSize: '1.5rem' }}>Edit Proposal</h2>
               <button onClick={() => setEditingProposal(null)} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}>

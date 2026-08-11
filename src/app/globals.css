@@ -95,7 +95,7 @@ button {
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.25rem;
   position: sticky;
   top: 0;
   height: 100vh;
@@ -126,7 +126,7 @@ button {
 }
 
 .top-header {
-  height: 80px;
+  height: 64px;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
@@ -139,7 +139,7 @@ button {
 }
 
 .page-content {
-  padding: 3rem;
+  padding: 2rem;
   flex: 1;
 }
 
@@ -165,7 +165,7 @@ button {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1rem;
+  padding: 0.75rem 1rem;
   border-radius: 12px;
   color: var(--text-secondary);
   font-weight: 600;
@@ -216,7 +216,7 @@ button {
 }
 
 .stat-value {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 900;
   font-family: var(--font-display);
   color: var(--accent-primary);
@@ -237,13 +237,13 @@ button {
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .flex-between {
